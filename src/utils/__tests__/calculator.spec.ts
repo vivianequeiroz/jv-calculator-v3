@@ -9,6 +9,12 @@ describe('Calculator utils', () => {
       expect(calculator.isValidExpression('13543-', '1')).toBe(true);
     });
 
+    it('should be able to return true when received a valid expression with semicolon', () => {
+      expect(calculator.isValidExpression('-10,15+', '1')).toBe(true);
+      expect(calculator.isValidExpression('-10,15-', '21,5')).toBe(true);
+      expect(calculator.isValidExpression('-10,15-', '21,5')).toBe(true);
+    });
+
     it('should be able to return false when received a simple invalid expression', () => {
       expect(calculator.isValidExpression('1+', '-')).toBe(false);
     });
