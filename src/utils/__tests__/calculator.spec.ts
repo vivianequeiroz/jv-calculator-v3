@@ -18,5 +18,10 @@ describe('Calculator utils', () => {
     it('should be able to return false when received a simple invalid expression', () => {
       expect(calculator.isValidExpression('1+', '-')).toBe(false);
     });
+
+    it('should be able to return false when received a invalid expression with semicolon', () => {
+      expect(calculator.isValidExpression('-10,1', ',')).toBe(false);
+      expect(calculator.isValidExpression('-10,1,2/', '2,0')).toBe(false);
+    });
   });
 });
