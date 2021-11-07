@@ -1,11 +1,4 @@
-export interface Dweet {
-  this: string;
-  by: string;
-  the: string;
-  with: With[];
-}
-
-export interface With {
+export interface DweetDTO {
   thing: string;
   created: string;
   content: Content;
