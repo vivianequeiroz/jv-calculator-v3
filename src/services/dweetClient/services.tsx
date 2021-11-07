@@ -1,4 +1,5 @@
 import { config } from '../../config';
+import { encodeParseDweet } from '../../utils/parser';
 
 import { dweetBaseURL } from './baseURL';
 
@@ -6,7 +7,7 @@ const { streamName } = config.services.dweet;
 
 export async function createDweet(dweet: string) {
   await dweetBaseURL.get(
-    `/dweet/for/${streamName}?expression=${encodeURI(dweet)}`,
+    `/dweet/for/${streamName}?expression=${encodeParseDweet(dweet)}`,
   );
 }
 

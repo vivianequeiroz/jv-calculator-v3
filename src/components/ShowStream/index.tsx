@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 
 import { config } from '../../config';
 import { dweetClient } from '../../services/dweetClient';
+import { decodeParseDweet } from '../../utils/parser';
 
 export function ShowStream() {
   const dweetThing = config.services.dweet.streamName;
@@ -27,12 +28,16 @@ export function ShowStream() {
       const lastDweet = dweet[0];
 
       if (lastDweet.content.expression) {
-        setDweet(lastDweet.content.expression);
+        const { expression } = lastDweet.content;
+
+        setDweet(decodeParseDweet(expression));
       }
     });
 
     dweetio.listen_for(dweetThing, function (dweet) {
-      setDweet(dweet.content.expression);
+      const { expression } = dweet.content;
+
+      setDweet(decodeParseDweet(expression));
     });
 
     () => dweetio.stop_listening_for(dweetThing);
