@@ -52,5 +52,14 @@ describe('Calculator utils', () => {
       expect(calculate('37,5x28,2')).toBe('1.057,5');
       expect(calculate('90x10')).toBe('900');
     });
+
+    it('should be able to calculate operation division between two numbers', () => {
+      expect(calculate('1/1')).toBe('1');
+      expect(calculate('1,2/1,1')).toBe('1,090909090909091');
+      expect(calculate('2/2')).toBe('1');
+      expect(calculate('3/2')).toBe('1,5');
+      expect(calculate('37,5/28,2')).toBe('1,329787234042553');
+      expect(calculate('90/10')).toBe('9');
+    });
   });
 });
