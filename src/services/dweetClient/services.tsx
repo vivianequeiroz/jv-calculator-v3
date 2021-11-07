@@ -30,3 +30,6 @@ export async function createDweet(dweet: string) {
 
 //   console.log('response', response);
 // }
+
+// Transfer-Encoding: chunked
+// Connection: keep-alive
