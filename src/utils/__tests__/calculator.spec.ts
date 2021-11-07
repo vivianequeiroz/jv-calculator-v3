@@ -43,5 +43,14 @@ describe('Calculator utils', () => {
       expect(calculate('37,5-28,2')).toBe('9,3');
       expect(calculate('90-10')).toBe('80');
     });
+
+    it('should be able to calculate operation multiplication between two numbers', () => {
+      expect(calculate('1x1')).toBe('1');
+      expect(calculate('1,2x1,1')).toBe('1,44');
+      expect(calculate('2x2')).toBe('4');
+      expect(calculate('3x2')).toBe('6');
+      expect(calculate('37,5x28,2')).toBe('1.057,5');
+      expect(calculate('90x10')).toBe('900');
+    });
   });
 });
