@@ -34,5 +34,14 @@ describe('Calculator utils', () => {
       expect(calculate('37,5+28,2')).toBe('65,7');
       expect(calculate('90+10')).toBe('100');
     });
+
+    it('should be able to calculate operation subtraction between two numbers', () => {
+      expect(calculate('1-1')).toBe('0');
+      expect(calculate('1,2-1,1')).toBe('0,1');
+      expect(calculate('2-2')).toBe('0');
+      expect(calculate('3-2')).toBe('2');
+      expect(calculate('37,5-28,2')).toBe('9,3');
+      expect(calculate('90-10')).toBe('80');
+    });
   });
 });
