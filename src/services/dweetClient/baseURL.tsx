@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export const dweetBaseURL = axios.create({
-  baseURL: 'https://dweet.io/',
-  timeout: 1000,
+  baseURL: 'https://dweet.io',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
