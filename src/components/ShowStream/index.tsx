@@ -10,13 +10,26 @@ export function ShowStream() {
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // calculate before
+
     setDweet(dweet);
     await dweetClient.createDweet(dweet);
   };
 
   useEffect(() => {
     const { dweetio } = window;
+
+    dweetio.get_latest_dweet_for(dweetThing, function (err, dweet) {
+      if (err) {
+        console.error(err);
+        alert('Ocorreu um erro ao recuperar a última expressão.');
+      }
+
+      const lastDweet = dweet[0];
+
+      if (lastDweet.content.expression) {
+        setDweet(lastDweet.content.expression);
+      }
+    });
 
     dweetio.listen_for(dweetThing, function (dweet) {
       setDweet(dweet.content.expression);
