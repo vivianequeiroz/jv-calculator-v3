@@ -1,5 +1,7 @@
+import { DweetDTO } from '../dtos/DweetDTO';
+
 export type Dweetio = {
-  listen_for: (thing: string, callback: (thing: string) => void) => void;
+  listen_for: (thing: string, callback: (dweet: DweetDTO) => void) => void;
   stop_listening_for: (thing: string) => void;
 };
 
