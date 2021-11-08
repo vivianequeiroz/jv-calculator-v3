@@ -4,9 +4,13 @@ type MathExpressionSymbols = 'x' | '/' | '+' | '-';
 const expressionSymbols = ['+', '-', 'x', '/', ','];
 
 function getOperationBySymbol(symbol: MathExpressionSymbols) {
-  // type MathOperation = (a: number, b: number) => number;
+  type MathOperation = (a: number, b: number) => number;
 
-  return (a: number, b: number) => `testing...${a} ${b}`;
+  const mathOperationBySymbol: Record<MathExpressionSymbols, MathOperation> = {
+    '+': (a, b) => a + b,
+  };
+
+  return mathOperationBySymbol[symbol];
 }
 
 function calculate(expression: string): string {
