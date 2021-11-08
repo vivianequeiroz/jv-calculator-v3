@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import './styles.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { isValidExpression,calculate } from '../../utils/calculator';
+import { config } from '../../config';
+import { decodeParseDweet } from '../../utils/parser';
 
 //Soma:
 //1. Guardar o primeiro numero inteiro escolhido
@@ -13,6 +15,8 @@ import { isValidExpression,calculate } from '../../utils/calculator';
 
 
 export function Calculator() {
+  const dweetThing = config.services.dweet.streamName;
+
   const [expression, setExpression] = useState("");
 
  const handleSetExpression = (candidateText: string) => {
@@ -40,6 +44,38 @@ export function Calculator() {
 
     setExpression(newExpression);
   }
+
+
+  useEffect(() => {
+    try{
+    const { dweetio } = window;
+
+    dweetio.get_latest_dweet_for(dweetThing, function (err, dweet) {
+      if (err) {
+        console.error(err);
+        alert('Ocorreu um erro ao recuperar a última expressão.');
+      }
+
+      const lastDweet = dweet[0];
+
+      if (lastDweet.content.expression) {
+        const { expression } = lastDweet.content;
+
+        setExpression(decodeParseDweet(expression));
+      }
+    });
+
+    dweetio.listen_for(dweetThing, function (dweet) {
+      const { expression } = dweet.content;
+
+      setExpression(decodeParseDweet(expression));
+    });
+
+    () => dweetio.stop_listening_for(dweetThing);
+  } catch (error) {
+    console.error('cannot connect into dweetio');
+  }
+  }, [dweetThing, setExpression]);
 
   return (
     <div>
