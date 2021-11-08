@@ -52,4 +52,27 @@ describe('<Calculator/>', () => {
 
     expect(inputResult).toHaveValue(expectedResult);
   });
+
+  it('should be able to clean result input when press RESET', () => {
+    render(<Calculator />);
+
+    const firstNumber = screen.getByTestId('2');
+    const secondNumber = screen.getByTestId('3');
+    const resultButton = screen.getByTestId('result-button');
+
+    const operationButton = screen.getByTestId('add-button');
+
+    const resetButton = screen.getByTestId('reset-button');
+
+    userEvent.click(firstNumber);
+    userEvent.click(operationButton);
+    userEvent.click(secondNumber);
+    userEvent.click(resultButton);
+
+    userEvent.click(resetButton);
+    const inputResult = screen.getByTestId('input');
+
+    const expectedResult = '';
+    expect(inputResult).toHaveValue(expectedResult);
+  });
 });
