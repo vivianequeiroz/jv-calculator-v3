@@ -31,6 +31,10 @@ export function Calculator() {
     setExpression(result);
   }
 
+  const onClear = () => {
+    setExpression("");
+  }
+
   return (
     <div>
       <h1 className="title">JV Calculator 3</h1>
@@ -96,7 +100,7 @@ export function Calculator() {
             </div>
           </div>
           <div className="button-controllers">
-            <button type="button" onClick={() => handleSetExpression("RESET")} className="reset">
+            <button type="button" onClick={onClear} className="reset" data-testid="reset-button" >
               RESET
             </button>
             <button type="submit" className="result" data-testid="result-button">
