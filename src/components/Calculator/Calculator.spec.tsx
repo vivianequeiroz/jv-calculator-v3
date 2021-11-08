@@ -75,4 +75,24 @@ describe('<Calculator/>', () => {
     const expectedResult = '';
     expect(inputResult).toHaveValue(expectedResult);
   });
+
+  it('should be able to delete a value', () => {
+    render(<Calculator />);
+
+    const firstNumber = screen.getByTestId('2');
+    const secondNumber = screen.getByTestId('3');
+
+    const operationButton = screen.getByTestId('add-button');
+    const deleteButton = screen.getByTestId('delete-button');
+
+    userEvent.click(firstNumber);
+    userEvent.click(operationButton);
+    userEvent.click(secondNumber);
+
+    userEvent.click(deleteButton);
+    const inputResult = screen.getByTestId('input');
+
+    const expectedResult = '2+';
+    expect(inputResult).toHaveValue(expectedResult);
+  });
 });
