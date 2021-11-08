@@ -35,6 +35,12 @@ export function Calculator() {
     setExpression("");
   }
 
+  const onDelete = () => {
+    const newExpression = expression.slice(0, -1);
+
+    setExpression(newExpression);
+  }
+
   return (
     <div>
       <h1 className="title">JV Calculator 3</h1>
@@ -85,7 +91,7 @@ export function Calculator() {
               </button>
             </div>
             <div className="button-column">
-              <button type="button" onClick={() => handleSetExpression("DEL")} className="button del" data-testid="delete-button">
+              <button type="button" onClick={onDelete} className="button del" data-testid="delete-button">
                 DEL
               </button>
               <button className="button" type="button" onClick={() => handleSetExpression("+")} data-testid="add-button">
