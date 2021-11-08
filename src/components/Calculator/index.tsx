@@ -1,11 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import './styles.scss';
 import { useState } from 'react';
 
+import { isValidExpression } from '../../utils/calculator';
+
+//Soma:
+//1. Guardar o primeiro numero inteiro escolhido
+//2. Guardar o sinal de soma
+//3. Guardar o segundo numero inteiro escolhido
+//4. Ao selecionar o botao de igual, somar os dois inteiros
+
 //import { calculate } from '../../utils/calculator';
 
 export function Calculator() {
-  const [expression, calculate] = useState(0);
+  const [expression, setExpression] = useState("");
+  function handleSetExpression(candidateText: string) {
+    if(isValidExpression(expression, candidateText)) {
+      const newExpression = `${expression}${candidateText}`;
+
+      setExpression(newExpression);
+  }
 
   return (
     <div>
@@ -15,64 +30,64 @@ export function Calculator() {
         <div className="buttons">
           <div className="buttons-operators">
             <div className="button-column">
-              <button type="button" className="button" data-testid="7">
+              <button type="button" onClick={() => handleSetExpression("7")} className="button" data-testid="7">
                 7
               </button>
-              <button type="button" className="button" data-testid="4">
+              <button type="button" onClick={() => handleSetExpression("4")} className="button" data-testid="4">
                 4
               </button>
-              <button type="button" className="button" data-testid="1">
+              <button type="button" onClick={() => handleSetExpression("1")} className="button" data-testid="1">
                 1
               </button>
-              <button type="button" className="button" data-testid=",">
+              <button type="button" onClick={() => handleSetExpression(",")} className="button" data-testid=",">
                 ,
               </button>
             </div>
             <div className="button-column">
-              <button type="button" className="button" data-testid="8">
+              <button type="button" onClick={() => handleSetExpression("8")} className="button" data-testid="8">
                 8
               </button>
-              <button type="button" className="button" data-testid="5">
+              <button type="button" onClick={() => handleSetExpression("5")} className="button" data-testid="5">
                 5
               </button>
-              <button type="button" onClick={() => calculate(expression)} value="{expression}" className="button" data-testid="2">
+              <button type="button" onClick={() => handleSetExpression("2")} className="button" data-testid="2">
                 2
               </button>
-              <button type="button" className="button" data-testid="0">
+              <button type="button" onClick={() => handleSetExpression("0")} className="button" data-testid="0">
                 0
               </button>
             </div>
             <div className="button-column">
-              <button type="button" className="button" data-testid="9">
+              <button type="button" onClick={() => handleSetExpression("9")} className="button" data-testid="9">
                 9
               </button>
-              <button type="button" className="button" data-testid="6">
+              <button type="button" onClick={() => handleSetExpression("6")} className="button" data-testid="6">
                 6
               </button>
-              <button type="button" onClick={() => calculate(expression)} className="button" data-testid="3">
+              <button type="button" onClick={() => handleSetExpression("3")} className="button" data-testid="3">
                 3
               </button>
-              <button className="button" type="button" data-testid="/">
+              <button className="button" type="button" onClick={() => handleSetExpression("/")} data-testid="/">
                 /
               </button>
             </div>
             <div className="button-column">
-              <button type="button" className="button del" data-testid="delete-button">
+              <button type="button" onClick={() => handleSetExpression("DEL")} className="button del" data-testid="delete-button">
                 DEL
               </button>
-              <button className="button" type="button" data-testid="add-button">
+              <button className="button" type="button" onClick={() => handleSetExpression("+")} data-testid="add-button">
                 +
               </button>
-              <button className="button" type="button" data-testid="subtract-button">
+              <button className="button" type="button" onClick={() => handleSetExpression("-")} data-testid="subtract-button">
                 -
               </button>
-              <button className="button" type="button" data-testid="multiply-button">
+              <button className="button" type="button" onClick={() => handleSetExpression("x")} data-testid="multiply-button">
                 x
               </button>
             </div>
           </div>
           <div className="button-controllers">
-            <button type="button" className="reset">
+            <button type="button" onClick={() => handleSetExpression("RESET")} className="reset">
               RESET
             </button>
             <button type="submit" className="result" data-testid="result-button">
@@ -84,5 +99,4 @@ export function Calculator() {
     </div>
   );
 }
-
-export default Calculator;
+}
