@@ -1,12 +1,17 @@
 /* eslint-disable prettier/prettier */
 import './styles.scss';
+import { useState } from 'react';
+
+//import { calculate } from '../../utils/calculator';
 
 export function Calculator() {
+  const [expression, calculate] = useState(0);
+
   return (
     <div>
       <h1 className="title">JV Calculator 3</h1>
       <form className="calculator-container">
-        <input className="input-numbers" />
+        <input className="input-numbers" data-testid="input"/>
         <div className="buttons">
           <div className="buttons-operators">
             <div className="button-column">
@@ -30,7 +35,7 @@ export function Calculator() {
               <button type="button" className="button" data-testid="5">
                 5
               </button>
-              <button type="button" className="button" data-testid="2">
+              <button type="button" onClick={() => calculate(expression)} value="{expression}" className="button" data-testid="2">
                 2
               </button>
               <button type="button" className="button" data-testid="0">
@@ -44,7 +49,7 @@ export function Calculator() {
               <button type="button" className="button" data-testid="6">
                 6
               </button>
-              <button type="button" className="button" data-testid="3">
+              <button type="button" onClick={() => calculate(expression)} className="button" data-testid="3">
                 3
               </button>
               <button className="button" type="button" data-testid="/">
