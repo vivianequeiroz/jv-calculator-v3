@@ -3,7 +3,7 @@
 import './styles.scss';
 import { useState } from 'react';
 
-import { isValidExpression } from '../../utils/calculator';
+import { isValidExpression,calculate } from '../../utils/calculator';
 
 //Soma:
 //1. Guardar o primeiro numero inteiro escolhido
@@ -11,22 +11,31 @@ import { isValidExpression } from '../../utils/calculator';
 //3. Guardar o segundo numero inteiro escolhido
 //4. Ao selecionar o botao de igual, somar os dois inteiros
 
-//import { calculate } from '../../utils/calculator';
 
 export function Calculator() {
   const [expression, setExpression] = useState("");
-  function handleSetExpression(candidateText: string) {
+
+ const handleSetExpression = (candidateText: string) => {
     if(isValidExpression(expression, candidateText)) {
       const newExpression = `${expression}${candidateText}`;
 
       setExpression(newExpression);
+    }
+  }
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const result = calculate(expression);
+
+    setExpression(result);
   }
 
   return (
     <div>
       <h1 className="title">JV Calculator 3</h1>
-      <form className="calculator-container">
-        <input className="input-numbers" data-testid="input"/>
+      <form className="calculator-container" onSubmit={onSubmit}>
+        <input disabled className="input-numbers" data-testid="input" value={expression}/>
         <div className="buttons">
           <div className="buttons-operators">
             <div className="button-column">
@@ -98,5 +107,4 @@ export function Calculator() {
       </form>
     </div>
   );
-}
 }
