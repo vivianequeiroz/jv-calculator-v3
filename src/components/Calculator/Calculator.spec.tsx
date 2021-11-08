@@ -1,4 +1,5 @@
-import { screen, fireEvent, render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { Calculator } from '.';
 
@@ -8,7 +9,7 @@ describe('<Calculator/>', () => {
 
     const numberButton = screen.getByTestId('7');
 
-    fireEvent.click(numberButton);
+    userEvent.click(numberButton);
     expect(numberButton).toBeInTheDocument();
   });
 
@@ -22,10 +23,10 @@ describe('<Calculator/>', () => {
     const operationButton = screen.getByTestId('add-button');
     const expectedResult = '5';
 
-    fireEvent.click(firstNumber);
-    fireEvent.click(operationButton);
-    fireEvent.click(secondNumber);
-    fireEvent.click(resultButton);
+    userEvent.click(firstNumber);
+    userEvent.click(operationButton);
+    userEvent.click(secondNumber);
+    userEvent.click(resultButton);
 
     const inputResult = screen.getByTestId('input');
 
@@ -42,10 +43,10 @@ describe('<Calculator/>', () => {
     const operationButton = screen.getByTestId('add-button');
     const expectedResult = '5';
 
-    fireEvent.click(firstNumber);
-    fireEvent.click(operationButton);
-    fireEvent.click(secondNumber);
-    fireEvent.click(resultButton);
+    userEvent.click(firstNumber);
+    userEvent.click(operationButton);
+    userEvent.click(secondNumber);
+    userEvent.click(resultButton);
 
     const inputResult = screen.getByTestId('input');
 
