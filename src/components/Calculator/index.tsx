@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { isValidExpression,calculate } from '../../utils/calculator';
 import { config } from '../../config';
 import { decodeParseDweet } from '../../utils/parser';
+import { dweetClient } from '../../services/dweetClient';
 
 //Soma:
 //1. Guardar o primeiro numero inteiro escolhido
@@ -19,20 +20,32 @@ export function Calculator() {
 
   const [expression, setExpression] = useState("");
 
- const handleSetExpression = (candidateText: string) => {
+ const handleSetExpression = async (candidateText: string) => {
     if(isValidExpression(expression, candidateText)) {
       const newExpression = `${expression}${candidateText}`;
 
       setExpression(newExpression);
+      try{
+        await dweetClient.createDweet(newExpression);
+      } catch(error: any) {
+        console.error('cannot create into dweetio');
+        console.log(error.message);
+      }
     }
   }
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const result = calculate(expression);
 
     setExpression(result);
+    try{
+      await dweetClient.createDweet(result);
+    } catch(error: any) {
+      console.error('cannot create into dweetio');
+      console.log(error.message);
+    }
   }
 
   const onClear = () => {
