@@ -8,6 +8,9 @@ function getOperationBySymbol(symbol: MathExpressionSymbols) {
 
   const mathOperationBySymbol: Record<MathExpressionSymbols, MathOperation> = {
     '+': (a, b) => a + b,
+    '-': (a, b) => a - b,
+    x: (a, b) => a * b,
+    '/': (a, b) => a / b,
   };
 
   return mathOperationBySymbol[symbol];
