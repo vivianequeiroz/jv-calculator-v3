@@ -89,14 +89,15 @@ const isValidExpression = (
   return !!isValidExpression && !hasInvalidTwoFactors && isValidComma;
 };
 
-const getSquareFromNumber = (text: string) => {
+const getSquareFromNumber = (number: string) => {
+  const candidate = number.replace(/,/, '.').replace(/,/, '');
   const patternValidSquareNumber = /(\d+|\+\d+|-\d+)/g;
 
-  if (patternValidSquareNumber.test(text)) {
-    return String(Math.sqrt(Number(text)));
+  if (patternValidSquareNumber.test(candidate)) {
+    return Math.sqrt(Number(candidate)).toString().replace('.', ',');
   }
 
-  return text;
+  return candidate.replace('.', ',');
 };
 
 export {
