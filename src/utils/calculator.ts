@@ -89,9 +89,20 @@ const isValidExpression = (
   return !!isValidExpression && !hasInvalidTwoFactors && isValidComma;
 };
 
+const getSquareFromNumber = (text: string) => {
+  const patternValidSquareNumber = /(\d+|\+\d+|-\d+)/g;
+
+  if (patternValidSquareNumber.test(text)) {
+    return String(Math.sqrt(Number(text)));
+  }
+
+  return text;
+};
+
 export {
   calculate,
   getOperationBySymbol,
   expressionSymbols,
   isValidExpression,
+  getSquareFromNumber,
 };
