@@ -3,7 +3,7 @@
 import './styles.scss';
 import { useEffect, useState } from 'react';
 
-import { isValidExpression,calculate } from '../../utils/calculator';
+import { isValidExpression,calculate, getSquareFromNumber } from '../../utils/calculator';
 import { config } from '../../config';
 import { decodeParseDweet } from '../../utils/parser';
 import { dweetClient } from '../../services/dweetClient';
@@ -56,6 +56,18 @@ export function Calculator() {
     const newExpression = expression.slice(0, -1);
 
     setExpression(newExpression);
+  }
+
+  const handleGetSquareFromNumber = async () => {
+    const result = getSquareFromNumber(expression);
+
+    setExpression(result);
+    try{
+      await dweetClient.createDweet(result);
+    } catch(error: any) {
+      console.error('cannot create into dweetio');
+      console.log(error.message);
+    }
   }
 
 
@@ -157,6 +169,9 @@ export function Calculator() {
           <div className="button-controllers">
             <button type="button" onClick={onClear} className="reset" data-testid="reset-button" >
               RESET
+            </button>
+            <button type="button" onClick={handleGetSquareFromNumber} className="reset" data-testid="square-button" >
+            √
             </button>
             <button type="submit" className="result" data-testid="result-button">
               =
