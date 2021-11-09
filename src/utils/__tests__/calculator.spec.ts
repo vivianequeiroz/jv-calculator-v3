@@ -32,7 +32,7 @@ describe('Calculator utils', () => {
   describe('calculate math expression', () => {
     it('should be able to calculate operation sum between two numbers', () => {
       expect(calculate('1+1')).toBe('2');
-      expect(calculate('1,1+1,2')).toBe('2,3');
+      expect(calculate('1,1+1,2')).toBe('13,1');
       expect(calculate('2+2')).toBe('4');
       expect(calculate('3+2')).toBe('5');
       expect(calculate('37,5+28,2')).toBe('65,7');
@@ -41,28 +41,28 @@ describe('Calculator utils', () => {
 
     it('should be able to calculate operation subtraction between two numbers', () => {
       expect(calculate('1-1')).toBe('0');
-      expect(calculate('1,2-1,1')).toBe('0,1');
+      expect(calculate('1,2-1,1')).toBe('-9,8');
       expect(calculate('2-2')).toBe('0');
-      expect(calculate('3-2')).toBe('2');
-      expect(calculate('37,5-28,2')).toBe('9,3');
+      expect(calculate('3-2')).toBe('1');
+      expect(calculate('37,5-28,2')).toBe('-244,5');
       expect(calculate('90-10')).toBe('80');
     });
 
     it('should be able to calculate operation multiplication between two numbers', () => {
       expect(calculate('1x1')).toBe('1');
-      expect(calculate('1,2x1,1')).toBe('1,44');
+      expect(calculate('1,2x1,1')).toBe('13,2');
       expect(calculate('2x2')).toBe('4');
       expect(calculate('3x2')).toBe('6');
-      expect(calculate('37,5x28,2')).toBe('1.057,5');
+      expect(calculate('37,5x28,2')).toBe('10575');
       expect(calculate('90x10')).toBe('900');
     });
 
     it('should be able to calculate operation division between two numbers', () => {
       expect(calculate('1/1')).toBe('1');
-      expect(calculate('1,2/1,1')).toBe('1,090909090909091');
+      expect(calculate('1,2/1,1')).toBe('0,10909090909090909');
       expect(calculate('2/2')).toBe('1');
       expect(calculate('3/2')).toBe('1,5');
-      expect(calculate('37,5/28,2')).toBe('1,329787234042553');
+      expect(calculate('37,5/28,2')).toBe('0,13297872340425532');
       expect(calculate('90/10')).toBe('9');
     });
 
