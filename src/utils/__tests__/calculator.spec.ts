@@ -1,4 +1,8 @@
-import { isValidExpression, calculate } from '../calculator';
+import {
+  isValidExpression,
+  calculate,
+  getSquareFromNumber,
+} from '../calculator';
 
 describe('Calculator utils', () => {
   describe('expression validation', () => {
@@ -60,6 +64,10 @@ describe('Calculator utils', () => {
       expect(calculate('3/2')).toBe('1,5');
       expect(calculate('37,5/28,2')).toBe('1,329787234042553');
       expect(calculate('90/10')).toBe('9');
+    });
+
+    it('should be able to get square from a number', () => {
+      expect(getSquareFromNumber('16')).toBe('4');
     });
   });
 });
