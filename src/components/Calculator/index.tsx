@@ -14,7 +14,6 @@ import { dweetClient } from '../../services/dweetClient';
 //3. Guardar o segundo numero inteiro escolhido
 //4. Ao selecionar o botao de igual, somar os dois inteiros
 
-
 export function Calculator() {
   const dweetThing = config.services.dweet.streamName;
 
@@ -48,11 +47,18 @@ export function Calculator() {
     }
   }
 
-  const onClear = () => {
+  const onClear = async () => {
     setExpression("");
+    try{
+      await dweetClient.createDweet("");
+      console.log("dweet funcionou")
+    } catch(error: any) {
+      console.error('cannot create into dweetio');
+      console.log(error.message);
+    }
   }
 
-  const onDelete = () => {
+  const onDelete = async () => {
     const newExpression = expression.slice(0, -1);
 
     setExpression(newExpression);
