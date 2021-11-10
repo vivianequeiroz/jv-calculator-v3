@@ -176,7 +176,7 @@ export function Calculator() {
             <button type="button" onClick={onClear} className="reset" data-testid="reset-button" >
               RESET
             </button>
-            <button type="button" onClick={handleGetSquareFromNumber} className="reset" data-testid="square-button" >
+            <button type="button" onClick={handleGetSquareFromNumber} className="button" data-testid="square-button" >
             √
             </button>
             <button type="submit" className="result" data-testid="result-button">
